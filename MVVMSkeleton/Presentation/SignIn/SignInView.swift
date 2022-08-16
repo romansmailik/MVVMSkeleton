@@ -69,7 +69,7 @@ final class SignInView: BaseView {
             $0.borderStyle = .roundedRect
         }
 
-        doneButton.setTitle(Localization.signUp, for: .normal)
+        doneButton.setTitle(Localization.signIn, for: .normal)
         doneButton.backgroundColor = .systemBlue
         doneButton.rounded(12)
     }
