@@ -1,0 +1,35 @@
+name: MVVMSkeleton
+options:
+  bundleIdPrefix: com.romansmailik
+  generateEmptyDirectories: true
+  createIntermediateGroups: true
+  groupSortPosition: top
+  deploymentTarget:
+    iOS: 13.0
+packages:
+  CombineCocoa:
+    url: https://github.com/CombineCommunity/CombineCocoa.git
+    majorVersion: 0.4.0
+  KeyboardLayoutGuide:
+    url: https://github.com/freshOS/KeyboardLayoutGuide
+    majorVersion: 1.0.0
+  Swinject:
+    url: https://github.com/Swinject/Swinject.git
+    majorVersion: 2.0.0
+  KeychainAccess:
+    url: https://github.com/kishikawakatsumi/KeychainAccess
+    majorVersion: 4.0.0
+targets:
+  MVVMSkeleton:
+    type: application
+    platform: iOS
+    sources:
+      - path: MVVMSkeleton
+    preBuildScripts:
+      - script: "if which swiftgen >/dev/null; then\n\tswiftgen\nelse\n\techo \"warning: SwiftGen not installed, download from https://github.com/SwiftGen/SwiftGen\"\nfi"
+        name: SwiftGen
+    dependencies:
+      - package: CombineCocoa
+      - package: KeyboardLayoutGuide
+      - package: Swinject
+      - package: KeychainAccess
