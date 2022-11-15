@@ -6,6 +6,43 @@ options:
   groupSortPosition: top
   deploymentTarget:
     iOS: 13.0
+configs:
+  Debug: debug
+  Release: release
+  Debug DEV: debug
+  Release DEV: release
+  Debug STG: debug
+  Release STG: release
+settings:
+  base:
+    INFOPLIST_FILE: MVVMSkeleton/Resources/Info.plist
+    ENABLE_BITCODE: false
+    SWIFT_VERSION: 5.0
+  configs:
+    Debug:
+      ENABLE_TESTABILITY: true
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      SWIFT_COMPILATION_MODE: singlefile
+    Release:
+      ENABLE_TESTABILITY: false
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
+    Debug DEV:
+      ENABLE_TESTABILITY: true
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      SWIFT_COMPILATION_MODE: singlefile
+    Release DEV:
+      ENABLE_TESTABILITY: false
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
+    Debug STG:
+      ENABLE_TESTABILITY: true
+      SWIFT_OPTIMIZATION_LEVEL: -Onone
+      SWIFT_COMPILATION_MODE: singlefile
+    Release STG:
+      ENABLE_TESTABILITY: false
+      SWIFT_OPTIMIZATION_LEVEL: -O
+      SWIFT_COMPILATION_MODE: wholemodule
 packages:
   CombineCocoa:
     url: https://github.com/CombineCommunity/CombineCocoa.git
@@ -13,9 +50,9 @@ packages:
   KeyboardLayoutGuide:
     url: https://github.com/freshOS/KeyboardLayoutGuide
     majorVersion: 1.0.0
-  Swinject:
-    url: https://github.com/Swinject/Swinject.git
-    majorVersion: 2.0.0
+  CombineNetworking:
+    url: https://github.com/chisw-ios/CombineNetworking
+    majorVersion: 0.1.0
   KeychainAccess:
     url: https://github.com/kishikawakatsumi/KeychainAccess
     majorVersion: 4.0.0
@@ -31,5 +68,75 @@ targets:
     dependencies:
       - package: CombineCocoa
       - package: KeyboardLayoutGuide
-      - package: Swinject
+      - package: CombineNetworking
       - package: KeychainAccess
+    configVariants:
+      - Debug
+      - Release
+      - Debug DEV
+      - Release DEV
+      - Debug STG
+      - Release STG
+    configFiles:
+      Debug: MVVMSkeleton/Application/Configuration/Configs/Config-PROD.xcconfig
+      Release: MVVMSkeleton/Application/Configuration/Configs/Config-PROD.xcconfig
+      Debug DEV: MVVMSkeleton/Application/Configuration/Configs/Config-DEV.xcconfig
+      Release DEV: MVVMSkeleton/Application/Configuration/Configs/Config-DEV.xcconfig
+      Debug STG: MVVMSkeleton/Application/Configuration/Configs/Config-STG.xcconfig
+      Release STG: MVVMSkeleton/Application/Configuration/Configs/Config-STG.xcconfig
+schemes:
+  MVVMSkeleton:
+    build:
+      targets:
+        MVVMSkeleton: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+      customArchiveName: MVVMSkeleton
+      revealArchiveInOrganizer: true
+  MVVMSkeleton DEV:
+    build:
+      targets:
+        MVVMSkeleton: all
+    run:
+      config: Debug DEV
+    test:
+      config: Debug DEV
+    profile:
+      config: Release DEV
+    analyze:
+      config: Debug DEV
+    archive:
+      config: Release DEV
+      customArchiveName: MVVMSkeleton DEV
+      revealArchiveInOrganizer: true
+  MVVMSkeleton STG:
+    build:
+      targets:
+        MVVMSkeleton: all
+    run:
+      config: Debug STG
+    test:
+      config: Debug STG
+    profile:
+      config: Release STG
+    analyze:
+      config: Debug STG
+    archive:
+      config: Release STG
+      customArchiveName: MVVMSkeleton STG
+      revealArchiveInOrganizer: true
+configFiles:
+  Debug: MVVMSkeleton/Application/Configuration/Configs/Config-PROD.xcconfig
+  Release: MVVMSkeleton/Application/Configuration/Configs/Config-PROD.xcconfig
+  Debug DEV: MVVMSkeleton/Application/Configuration/Configs/Config-DEV.xcconfig
+  Release DEV: MVVMSkeleton/Application/Configuration/Configs/Config-DEV.xcconfig
+  Debug STG: MVVMSkeleton/Application/Configuration/Configs/Config-STG.xcconfig
+  Release STG: MVVMSkeleton/Application/Configuration/Configs/Config-STG.xcconfig
